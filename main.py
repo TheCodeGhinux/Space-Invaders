@@ -57,7 +57,7 @@ invader_Ychange = []
 no_of_invaders = 8
 
 for num in range(no_of_invaders):
-    invaderImage.append(pygame.image.load('data/alien.png'))
+    invaderImage.append(pygame.image.load('data/alien2.png'))
     invader_X.append(random.randint(64, 737))
     invader_Y.append(random.randint(30, 180))
     invader_Xchange.append(1.2)
@@ -66,7 +66,7 @@ for num in range(no_of_invaders):
 # Bullet
 # rest - bullet is not moving
 # fire - bullet is moving
-bulletImage = pygame.image.load('data/bullet.png')
+bulletImage = pygame.image.load('data/bullet.jpg')
 bullet_X = 0
 bullet_Y = 500
 bullet_Xchange = 0
@@ -75,7 +75,7 @@ bullet_state = "rest"
 
 
 # Collision Concept
-def isCollision(x1, x2, y1, y2):
+def is_collision(x1, x2, y1, y2):
     distance = math.sqrt((math.pow(x1 - x2, 2)) +
                          (math.pow(y1 - y2, 2)))
     if distance <= 50:
@@ -118,7 +118,7 @@ while running:
             if event.key == pygame.K_SPACE:
 
                 # Fixing the change of direction of bullet
-                if bullet_state is "rest":
+                if bullet_state == "rest":
                     bullet_X = player_X
                     bullet(bullet_X, bullet_Y)
                     bullet_sound = mixer.Sound('data/bullet.wav')
@@ -135,7 +135,7 @@ while running:
     if bullet_Y <= 0:
         bullet_Y = 600
         bullet_state = "rest"
-    if bullet_state is "fire":
+    if bullet_state == "fire":
         bullet(bullet_X, bullet_Y)
         bullet_Y -= bullet_Ychange
 
@@ -149,14 +149,16 @@ while running:
                     explosion_sound = mixer.Sound('data/explosion.wav')
                     explosion_sound.play()
                 game_over()
+            else:
+                print('Play Again?')
                 break
 
         if invader_X[i] >= 735 or invader_X[i] <= 0:
             invader_Xchange[i] *= -1
             invader_Y[i] += invader_Ychange[i]
         # Collision
-        collision = isCollision(bullet_X, invader_X[i],
-                                bullet_Y, invader_Y[i])
+        collision = is_collision(bullet_X, invader_X[i],
+                                 bullet_Y, invader_Y[i])
         if collision:
             score_val += 1
             bullet_Y = 600
