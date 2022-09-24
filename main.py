@@ -148,7 +148,7 @@ while running:
                     invader_Y[j] = 2000
                     explosion_sound = mixer.Sound('data/explosion.wav')
                     explosion_sound.play()
-                # game_over()
+                game_over()
             else:
                 break
 
