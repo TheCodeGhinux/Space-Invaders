@@ -35,7 +35,7 @@ def show_score(x, y):
 def game_over():
     game_over_text = game_over_font.render("GAME OVER",
                                            True, (255, 255, 255))
-    screen.blit(game_over_text, (190, 250))
+    # screen.blit(game_over_text, (190, 250))
 
 
 # Background Sound
@@ -66,7 +66,7 @@ for num in range(no_of_invaders):
 # Bullet
 # rest - bullet is not moving
 # fire - bullet is moving
-bulletImage = pygame.image.load('data/bullet.jpg')
+bulletImage = pygame.image.load('data/bullet.png')
 bullet_X = 0
 bullet_Y = 500
 bullet_Xchange = 0
@@ -148,10 +148,10 @@ while running:
                     invader_Y[j] = 2000
                     explosion_sound = mixer.Sound('data/explosion.wav')
                     explosion_sound.play()
-                game_over()
+                # game_over()
             else:
-                print('Play Again?')
                 break
+
 
         if invader_X[i] >= 735 or invader_X[i] <= 0:
             invader_Xchange[i] *= -1
